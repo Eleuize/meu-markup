@@ -1,0 +1,390 @@
+[14/07/2026 17:09] IA: <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Markup & Lucro Real - Importação</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen font-sans">
+
+<div class="container mx-auto px-4 py-8 max-w-7xl">
+<header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 pb-6">
+<div class="flex items-center space-x-4 mb-4 md:mb-0">
+<div class="bg-blue-600 p-3 rounded-lg text-white text-2xl shadow-lg">
+<i class="fa-solid fa-calculator"></i>
+</div>
+<div>
+<h1 class="text-2xl font-bold tracking-tight">SmartMarkup</h1>
+<p class="text-sm text-gray-400">Calculadora de Custos de Importação DHL & Marketplaces</p>
+</div>
+</div>
+<div class="text-right">
+<span class="text-xs bg-blue-900 text-blue-300 px-3 py-1 rounded-full font-semibold border border-blue-800">
+Importação Simplificada (Courier)
+</span>
+</div>
+</header>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+<div class="lg:col-span-2 space-y-6">
+
+<div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl">
+<h2 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+<i class="fa-solid fa-box mr-2"></i> 1. Identificação do Produto ou Kit
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="md:col-span-2">
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Nome do Produto / Kit</label>
+<input type="text" id="prodNome" placeholder="Ex: Kit Smartwatch Ultra + Pulseira" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500">
+</div>
+<div>
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Tipo de Cadastro</label>
+<select id="prodTipo" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500">
+<option value="unico">Produto Único</option>
+<option value="kit">Kit de Produtos</option>
+</select>
+</div>
+</div>
+
+<div class="mt-4 flex items-center space-x-4">
+<div class="flex-1">
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Imagem do Produto</label>
+<input type="file" id="prodImagem" accept="image/*" class="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+</div>
+<div class="w-16 h-16 bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden border border-gray-600 shadow-inner">
+<img id="previewImg" src="" class="hidden w-full h-full object-cover">
+<i id="previewPlaceholder" class="fa-solid fa-image text-gray-500 text-2xl"></i>
+</div>
+</div>
+</div>
+
+<div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl">
+<h2 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+<i class="fa-solid fa-plane-departs mr-2"></i> 2. Custos de Importação (USD para BRL)
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div>
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Valor FOB (USD)</label>
+<input type="number" id="impFob" value="50.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+</div>
+<div>
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Cotação Dólar (R)</label>
+<input type="number" id="impTaxaDhlBrl" value="120.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+</div>
+</div>
+
+<div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl">
+<h2 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+<i class="fa-solid fa-boxes-packing mr-2"></i> 3. Despesas Operacionais e Nacionais (R$`)
+</h2>
+<div class="gr
+[14/07/2026 17:09] IA: id grid-cols-1 md:grid-cols-4 gap-4">
+<div>
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Embalagem (Un.)</label>
+<input type="number" id="opEmbalagem" value="4.50" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+</div>
+<div>
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Marketing (CAC)</label>
+<input type="number" id="opMkt" value="12.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+</div>
+<div>
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Custos Fixos Prorrat.</label>
+<input type="number" id="opCustoFixo" value="8.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+</div>
+<div>
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Imposto Simples (%)</label>
+<input type="number" id="opSimplesNacional" value="6.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+</div>
+</div>
+</div>
+
+<div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl">
+<h2 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
+<i class="fa-solid fa-store mr-2"></i> 4. Parâmetros dos Marketplaces
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-gray-700/50 p-4 rounded-lg border border-gray-600">
+<span class="text-yellow-400 font-bold block mb-3 border-b border-gray-600 pb-1">
+<i class="fa-solid fa-handshake"></i> Mercado Livre
+</span>
+<div class="space-y-3">
+<div>
+<label class="block text-[10px] font-semibold text-gray-400 uppercase">Comissão (%)</label>
+<input type="number" id="mktMeliTaxa" value="16.50" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white">
+</div>
+<div>
+<label class="block text-[10px] font-semibold text-gray-400 uppercase">Tarifa Fixa (R$)&lt;/label&gt; &lt;input type="number" id="mktMeliFixa" value="6.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white"&gt; &lt;/div&gt; &lt;div&gt; &lt;label class="block text-[10px] font-semibold text-gray-400 uppercase"&gt;Custo de Envio (R$)</label>
+<input type="number" id="mktMeliEnvio" value="21.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white">
+</div>
+</div>
+</div>
+
+<div class="bg-gray-700/50 p-4 rounded-lg border border-gray-600">
+<span class="text-orange-400 font-bold block mb-3 border-b border-gray-600 pb-1">
+<i class="fa-brands fa-amazon"></i> Amazon (FBA/DBA)
+</span>
+<div class="space-y-3">
+<div>
+<label class="block text-[10px] font-semibold text-gray-400 uppercase">Comissão (%)</label>
+<input type="number" id="mktAmazonTaxa" value="15.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white">
+</div>
+<div>
+<label class="block text-[10px] font-semibold text-gray-400 uppercase">Tarifa por item (R$)&lt;/label&gt; &lt;input type="number" id="mktAmazonFixa" value="2.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white"&gt; &lt;/div&gt; &lt;div&gt; &lt;label class="block text-[10px] font-semibold text-gray-400 uppercase"&gt;Custo FBA/Envio (R$)</label>
+<input type="number" id="mktAmazonEnvio" value="16.50" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white">
+</div>
+</div>
+</div>
+
+<div class="bg-gray-700/50 p-4 rounded-lg border border-gray-600">
+<span class="text-orange-500 font-bold block mb-3 border-b border-gray-600 pb-1">
+<i class="fa-solid fa-bag-shopping"></i> Shopee
+</span>
+<div class="space-y-3">
+<div>
+<label class="block text-[10px] font-semibold text-gray-400 uppercase">Comissão + Frete Grátis (%)</label>
+<input type="number" id="mktShopeeTaxa" value="20.00" step="0.01" class="w-full bg-gray-700 border b
+[14/07/2026 17:09] IA: order-gray-600 rounded px-2 py-1 text-sm text-white">
+</div>
+<div>
+<label class="block text-[10px] font-semibold text-gray-400 uppercase">Tarifa Fixa (R$)&lt;/label&gt; &lt;input type="number" id="mktShopeeFixa" value="3.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white"&gt; &lt;/div&gt; &lt;div&gt; &lt;label class="block text-[10px] font-semibold text-gray-400 uppercase"&gt;Frete/Extras (R$)</label>
+<input type="number" id="mktShopeeEnvio" value="0.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white">
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="space-y-6">
+
+<div class="bg-gradient-to-br from-blue-900 to-indigo-950 p-6 rounded-xl border border-blue-800 shadow-xl">
+<h2 class="text-lg font-bold text-white mb-4 flex items-center">
+<i class="fa-solid fa-coins mr-2 text-yellow-400"></i> Alvo de Venda
+</h2>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-semibold text-blue-200 uppercase mb-2">Preço de Venda Desejado (R$)</label>
+<input type="number" id="alvoPreco" value="299.90" step="0.10" class="w-full bg-blue-950 border border-blue-700 rounded-lg px-4 py-3 text-2xl font-bold text-white text-center focus:outline-none focus:border-yellow-400">
+</div>
+</div>
+
+<div class="mt-4 pt-4 border-t border-blue-800 text-xs text-blue-200 space-y-2">
+<div class="flex justify-between">
+<span>Custo Aduaneiro Total (BRL):</span>
+<span id="resCustoAduaneiro" class="font-semibold text-white">R 0,00</span>
+</div>
+<div class="flex justify-between pt-2 border-t border-blue-800 text-sm font-bold text-white">
+<span>CUSTO POSTO EM ESTOQUE:</span>
+<span id="resCustoEstoque" class="text-yellow-400">R$ 0,00</span>
+</div>
+</div>
+</div>
+
+<div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-6">
+<h2 class="text-lg font-semibold text-white flex items-center border-b border-gray-700 pb-3">
+<i class="fa-solid fa-chart-line mr-2 text-green-400"></i> Desempenho por Canal
+</h2>
+
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-yellow-400 text-sm"><i class="fa-solid fa-handshake"></i> Mercado Livre</span>
+<span id="badgeMeli" class="text-xs px-2 py-0.5 rounded font-bold">Excelente</span>
+</div>
+<div class="bg-gray-900 p-3 rounded-lg border border-gray-700">
+<div class="grid grid-cols-2 gap-2 text-xs">
+<div>Markup: <b id="meliMarkup" class="text-white">0.00</b></div>
+<div>Margem: <b id="meliMargem" class="text-white">0.00%</b></div>
+<div class="col-span-2 pt-1 border-t border-gray-800 flex justify-between">
+<span>Lucro Real:</span>
+<span id="meliLucro" class="font-bold text-sm text-white">R$ 0,00</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-orange-400 text-sm"><i class="fa-brands fa-amazon"></i> Amazon</span>
+<span id="badgeAmazon" class="text-xs px-2 py-0.5 rounded font-bold">Normal</span>
+</div>
+<div class="bg-gray-900 p-3 rounded-lg border border-gray-700">
+<div class="grid grid-cols-2 gap-2 text-xs">
+<div>Markup: <b id="amazonMarkup" class="text-white">0.00</b></div>
+<div>Margem: <b id="amazonMargem" class="text-white">0.00%</b></div>
+<div class="col-span-2 pt-1 border-t border-gray-800 flex justify-between">
+<span>Lucro Real:</span>
+<span id="amazonLucro" class="font-bold text-sm text-white">R$ 0,00</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-orange-500 text-sm"><i class="fa-solid fa-bag-shopping"></i> Shopee</span>
+<span id="badgeShopee" class="text-xs px-2 py-0.5 rounded font-bold">Perigo</span>
+</div>
+<div class="bg-gray-900 p-3 rounded-lg border border-gray-700">
+<div class="grid grid-cols-2 gap-2 text-xs">
+<div>Markup: <b id="shopeeMarkup" class="text-white">0.00</b></div>
+<div>Margem: <b id="shopeeMargem" class="text-white">0.00%</b></div>
+<div class="col-span-2 pt-1 border-t border-gray-800 flex justify-between">
+<span>Lucro Real:</span>
+<span id="shopee
+[14/07/2026 17:09] IA: Lucro" class="font-bold text-sm text-white">R$ 0,00</span>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script>
+// Elementos de entrada
+const inputs = [
+'prodTipo', 'impFob', 'impDolar', 'impFreteDhl', 'impSeguro',
+'impAliquotaII', 'impIcms', 'impTaxaDhlBrl', 'opEmbalagem',
+'opMkt', 'opCustoFixo', 'opSimplesNacional', 'alvoPreco',
+'mktMeliTaxa', 'mktMeliFixa', 'mktMeliEnvio',
+'mktAmazonTaxa', 'mktAmazonFixa', 'mktAmazonEnvio',
+'mktShopeeTaxa', 'mktShopeeFixa', 'mktShopeeEnvio'
+ ];
+
+// Adiciona ouvinte de evento em todos os inputs para atualizar em tempo real
+inputs.forEach(id => {
+document.getElementById(id).addEventListener('input', calcularTudo);
+document.getElementById(id).addEventListener('change', calcularTudo);
+});
+
+// Lógica de Preview de Imagem
+document.getElementById('prodImagem').addEventListener('change', function(e) {
+const reader = new FileReader();
+reader.onload = function(){
+const preview = document.getElementById('previewImg');
+const placeholder = document.getElementById('previewPlaceholder');
+preview.src = reader.result;
+preview.classList.remove('hidden');
+placeholder.classList.add('hidden');
+}
+if(e.target.files[0]) {
+reader.readAsDataURL(e.target.files[0]);
+}
+});
+
+function calcularTudo() {
+// Obter Valores de Entrada
+const fob = parseFloat(document.getElementById('impFob').value) || 0;
+const dolar = parseFloat(document.getElementById('impDolar').value) || 0;
+const freteDhl = parseFloat(document.getElementById('impFreteDhl').value) || 0;
+const seguro = parseFloat(document.getElementById('impSeguro').value) || 0;
+const aliquotaII = (parseFloat(document.getElementById('impAliquotaII').value) || 0) / 100;
+const icmsAliquota = (parseFloat(document.getElementById('impIcms').value) || 0) / 100;
+const taxasDhlBrl = parseFloat(document.getElementById('impTaxaDhlBrl').value) || 0;
+
+const embalagem = parseFloat(document.getElementById('opEmbalagem').value) || 0;
+const mkt = parseFloat(document.getElementById('opMkt').value) || 0;
+const custoFixo = parseFloat(document.getElementById('opCustoFixo').value) || 0;
+const impSimples = (parseFloat(document.getElementById('opSimplesNacional').value) || 0) / 100;
+
+const precoVenda = parseFloat(document.getElementById('alvoPreco').value) || 0;
+
+// --- 1. CÁLCULO DE IMPORTAÇÃO (COURIER) ---
+// Valor CIF Aduaneiro em Reais
+const cifUsd = fob + freteDhl + seguro;
+const cifBrl = cifUsd * dolar;
+
+// Imposto de Importação (Federal)
+const impostoImportacao = cifBrl * aliquotaII;
+
+// Cálculo do ICMS por dentro (Regra padrão brasileira)
+// Fórmula da Base do ICMS: (CIF + II) / (1 - Alíquota ICMS)
+let icmsBrl = 0;
+if (icmsAliquota < 1) {
+const baseIcms = (cifBrl + impostoImportacao) / (1 - icmsAliquota);
+icmsBrl = baseIcms * icmsAliquota;
+}
+
+// Total do desembaraço da carga em BRL (Custos da Receita + DHL)
+const totalCustoImportacao = cifBrl + impostoImportacao + icmsBrl + taxasDhlBrl;
+
+// --- 2. CUSTO POSTO EM ESTOQUE ---
+const custosNacionaisFixo = embalagem + custoFixo;
+const custoEstoqueTotal = totalCustoImportacao + custosNacionaisFixo;
+
+// Atualiza Dashboard Central (Parte Superior Direita)
+document.getElementById('resCustoAduaneiro').innerText = formatarBRL(totalCustoImportacao);
+document.getElementById('resCustosOps').innerText = formatarBRL(custosNacionaisFixo);
+document.getElementById('resCustoEstoque').innerText = formatarBRL(custoEstoqueTotal);
+
+// --- 3. CÁLCULO DE CANAIS DE MARKETPLACES ---
+calcularCanal('Meli', custoEstoqueTotal, precoVenda, mkt, impSimples);
+calcularCanal('Amazon', custoEstoqueTotal, precoVenda, mkt, impSimples);
+calcularCanal('Shopee', custoEstoqueTotal, precoVenda, mkt, impSimples);
+}
+
+function calcularCanal(canalId, custoEstoque, precoVenda, marketing, impSimplesAliq) {
+// Pegar os parâmetros específicos do Marketplace selecionado
+const comissaoPercentual = (parseFloat(document.getElementById(mkt${canalId}Taxa).value) || 0) / 100; const taxaFixa = parseFloat(document.getElementById(mkt${canalId}Fixa).value) || 0;
+const custoEnvio = parseFloat(document.getElementById(mkt${canalId}Envio).value) || 0;
+
+// Taxa comissão sobre a venda
+c
+[14/07/2026 17:09] IA: onst taxaComissaoVenda = precoVenda * comissaoPercentual;
+// Imposto de faturamento nacional (Simples Nacional)
+const impostoNacional = precoVenda * impSimplesAliq;
+
+// Despesa total de venda
+const totalDespesaVenda = taxaComissaoVenda + taxaFixa + custoEnvio + impostoNacional + marketing;
+
+// Lucro Real
+const lucroReal = precoVenda - (custoEstoque + totalDespesaVenda);
+
+// Margem Real (%)
+const margemReal = precoVenda > 0 ? (lucroReal / precoVenda) * 100 : 0;
+
+// Markup Praticado (Preço de Venda / Custo de Aquisição)
+const markup = custoEstoque > 0 ? (precoVenda / custoEstoque) : 0;
+
+// Interface e Badges de Alerta de Margem
+const badge = document.getElementById(badge${canalId});
+if (margemReal <= 0) {
+badge.innerText = "Prejuízo";
+badge.className = "text-xs px-2 py-0.5 rounded font-bold bg-red-900/80 text-red-300 border border-red-700";
+} else if (margemReal < 10) {
+badge.innerText = "Apertada";
+badge.className = "text-xs px-2 py-0.5 rounded font-bold bg-yellow-900/80 text-yellow-300 border border-yellow-700";
+} else {
+badge.innerText = "Saudável";
+badge.className = "text-xs px-2 py-0.5 rounded font-bold bg-green-900/80 text-green-300 border border-green-700";
+}
+
+// Exibir Dados Formatados
+document.getElementById(${canalId.toLowerCase()}Markup).innerText = markup.toFixed(2); document.getElementById(`${canalId.toLowerCase()}Margem).innerText = margemReal.toFixed(2) + '%';
+
+const txtLucro = document.getElementById(${canalId.toLowerCase()}Lucro);
+txtLucro.innerText = formatarBRL(lucroReal);
+if(lucroReal < 0) {
+txtLucro.className = "font-bold text-sm text-red-400";
+} else {
+txtLucro.className = "font-bold text-sm text-green-400";
+}
+}
+
+function formatarBRL(valor) {
+return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+// Iniciar cálculo inicial
+calcularTudo();
+</script>
+</body>
+</html>
