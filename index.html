@@ -1,9 +1,9 @@
-[14/07/2026 17:09] IA: <!DOCTYPE html>
+[14/07/2026 17:59] Luiz Lopes: <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Markup & Lucro Real - Importação</title>
+<title>SmartMarkup Pro - Importação & Lista de Produtos</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -16,14 +16,18 @@
 <i class="fa-solid fa-calculator"></i>
 </div>
 <div>
-<h1 class="text-2xl font-bold tracking-tight">SmartMarkup</h1>
-<p class="text-sm text-gray-400">Calculadora de Custos de Importação DHL & Marketplaces</p>
+<h1 class="text-2xl font-bold tracking-tight">SmartMarkup Pro v2.0</h1>
+<p class="text-sm text-gray-400">Gerenciador de Custos de Importação DHL & Multicanais</p>
 </div>
 </div>
-<div class="text-right">
-<span class="text-xs bg-blue-900 text-blue-300 px-3 py-1 rounded-full font-semibold border border-blue-800">
-Importação Simplificada (Courier)
-</span>
+<div class="flex space-x-2">
+<button onclick="exportarCSV()" class="bg-gray-800 hover:bg-gray-700 text-xs text-gray-300 font-bold py-2 px-4 rounded border border-gray-700 flex items-center">
+<i class="fa-solid fa-file-export mr-2 text-green-400"></i> Exportar Dados (CSV)
+</button>
+<label class="bg-gray-800 hover:bg-gray-700 text-xs text-gray-300 font-bold py-2 px-4 rounded border border-gray-700 flex items-center cursor-pointer">
+<i class="fa-solid fa-file-import mr-2 text-blue-400"></i> Importar Planilha
+<input type="file" id="importarArquivo" accept=".csv" class="hidden" onchange="importarCSV(event)">
+</label>
 </div>
 </header>
 
@@ -37,21 +41,21 @@ Importação Simplificada (Courier)
 </h2>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <div class="md:col-span-2">
-<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Nome do Produto / Kit</label>
-<input type="text" id="prodNome" placeholder="Ex: Kit Smartwatch Ultra + Pulseira" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500">
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Nome do Produto / SKU</label>
+<input type="text" id="prodNome" placeholder="Ex: Smartwatch Ultra Y8 - SKU123" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500">
 </div>
 <div>
-<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Tipo de Cadastro</label>
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Tipo</label>
 <select id="prodTipo" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500">
-<option value="unico">Produto Único</option>
-<option value="kit">Kit de Produtos</option>
+<option value="Único">Produto Único</option>
+<option value="Kit">Kit de Produtos</option>
 </select>
 </div>
 </div>
 
 <div class="mt-4 flex items-center space-x-4">
 <div class="flex-1">
-<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Imagem do Produto</label>
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Foto do Produto</label>
 <input type="file" id="prodImagem" accept="image/*" class="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
 </div>
 <div class="w-16 h-16 bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden border border-gray-600 shadow-inner">
@@ -63,16 +67,17 @@ Importação Simplificada (Courier)
 
 <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl">
 <h2 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
-<i class="fa-solid fa-plane-departs mr-2"></i> 2. Custos de Importação (USD para BRL)
+<i class="fa-solid fa-plane-departs mr-2"></i> 2. Custos de Importação (Aérea / DHL)
 </h2>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <div>
 <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Valor FOB (USD)</label>
-<input type="number" id="impFob" value="50.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+<input type="number" id="impFob" value="15.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
 </div>
 <div>
 <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Cotação Dólar (R)</label>
-<input type="number" id="impTaxaDhlBrl" value="120.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+<input type="number" id="im
+[14/07/2026 17:59] Luiz Lopes: pTaxaDhlBrl" value="15.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
 </div>
 </div>
 
@@ -80,22 +85,21 @@ Importação Simplificada (Courier)
 <h2 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
 <i class="fa-solid fa-boxes-packing mr-2"></i> 3. Despesas Operacionais e Nacionais (R$`)
 </h2>
-<div class="gr
-[14/07/2026 17:09] IA: id grid-cols-1 md:grid-cols-4 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
 <div>
 <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Embalagem (Un.)</label>
-<input type="number" id="opEmbalagem" value="4.50" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+<input type="number" id="opEmbalagem" value="3.50" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
 </div>
 <div>
 <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Marketing (CAC)</label>
-<input type="number" id="opMkt" value="12.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+<input type="number" id="opMkt" value="10.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
 </div>
 <div>
-<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Custos Fixos Prorrat.</label>
-<input type="number" id="opCustoFixo" value="8.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Custos Fixos Prorr.</label>
+<input type="number" id="opCustoFixo" value="5.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
 </div>
 <div>
-<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Imposto Simples (%)</label>
+<label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Simples Nac. (%)</label>
 <input type="number" id="opSimplesNacional" value="6.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
 </div>
 </div>
@@ -103,55 +107,28 @@ Importação Simplificada (Courier)
 
 <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl">
 <h2 class="text-lg font-semibold text-blue-400 mb-4 flex items-center">
-<i class="fa-solid fa-store mr-2"></i> 4. Parâmetros dos Marketplaces
+<i class="fa-solid fa-store mr-2"></i> 4. Configuração das Contas dos Marketplaces
 </h2>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <div class="bg-gray-700/50 p-4 rounded-lg border border-gray-600">
-<span class="text-yellow-400 font-bold block mb-3 border-b border-gray-600 pb-1">
-<i class="fa-solid fa-handshake"></i> Mercado Livre
-</span>
-<div class="space-y-3">
-<div>
-<label class="block text-[10px] font-semibold text-gray-400 uppercase">Comissão (%)</label>
-<input type="number" id="mktMeliTaxa" value="16.50" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white">
-</div>
-<div>
-<label class="block text-[10px] font-semibold text-gray-400 uppercase">Tarifa Fixa (R$)&lt;/label&gt; &lt;input type="number" id="mktMeliFixa" value="6.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white"&gt; &lt;/div&gt; &lt;div&gt; &lt;label class="block text-[10px] font-semibold text-gray-400 uppercase"&gt;Custo de Envio (R$)</label>
-<input type="number" id="mktMeliEnvio" value="21.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white">
+<span class="text-yellow-400 font-bold block mb-3 border-b border-gray-600 pb-1">Mercado Livre</span>
+<div class="space-y-2">
+<input type="number" id="mktMeliTaxa" value="16.5" placeholder="Comissão %" class="w-full bg-gray-700 border border-gray-600 rounded p-1.5 text-xs text-white">
+<input type="number" id="mktMeliFixa" value="6.00" placeholder="Taxa Fixa R$" class="w-full bg-gray-700 border border-gray-600 rounded p-1.5 text-xs text-white"&gt; &lt;input type="number" id="mktMeliEnvio" value="19.00" placeholder="Frete R$" class="w-full bg-gray-700 border border-gray-600 rounded p-1.5 text-xs text-white">
 </div>
 </div>
-</div>
-
 <div class="bg-gray-700/50 p-4 rounded-lg border border-gray-600">
-<span class="text-orange-400 font-bold block mb-3 border-b border-gray-600 pb-1">
-<i class="fa-brands fa-amazon"></i> Amazon (FBA/DBA)
-</span>
-<div class="space-y-3">
-<div>
-<label class="block text-[10px] font-semibold text-gray-400 uppercase">Comissão (%)</label>
-<input type="number" id="mktAmazonTaxa" value="15.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white">
-</div>
-<div>
-<label class="block text-[10px] font-semibold text-gray-400 uppercase">Tarifa por item (R$)&lt;/label&gt; &lt;input type="number" id="mktAmazonFixa" value="2.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white"&gt; &lt;/div&gt; &lt;div&gt; &lt;label class="block text-[10px] font-semibold text-gray-400 uppercase"&gt;Custo FBA/Envio (R$)</label>
-<input type="number" id="mktAmazonEnvio" value="16.50" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white">
+<span class="text-orange-400 font-bold block mb-3 border-b border-gray-600 pb-1">Amazon</span>
+<div class="space-y-2">
+<input type="number" id="mktAmazonTaxa" value="15.0" placeholder="Comissão %" class="w-full bg-gray-700 border border-gray-600 rounded p-1.5 text-xs text-white">
+<input type="number" id="mktAmazonFixa" value="2.00" placeholder="Taxa FBA R$" class="w-full bg-gray-700 border border-gray-600 rounded p-1.5 text-xs text-white"&gt; &lt;input type="number" id="mktAmazonEnvio" value="15.00" placeholder="Frete R$" class="w-full bg-gray-700 border border-gray-600 rounded p-1.5 text-xs text-white">
 </div>
 </div>
-</div>
-
 <div class="bg-gray-700/50 p-4 rounded-lg border border-gray-600">
-<span class="text-orange-500 font-bold block mb-3 border-b border-gray-600 pb-1">
-<i class="fa-solid fa-bag-shopping"></i> Shopee
-</span>
-<div class="space-y-3">
-<div>
-<label class="block text-[10px] font-semibold text-gray-400 uppercase">Comissão + Frete Grátis (%)</label>
-<input type="number" id="mktShopeeTaxa" value="20.00" step="0.01" class="w-full bg-gray-700 border b
-[14/07/2026 17:09] IA: order-gray-600 rounded px-2 py-1 text-sm text-white">
-</div>
-<div>
-<label class="block text-[10px] font-semibold text-gray-400 uppercase">Tarifa Fixa (R$)&lt;/label&gt; &lt;input type="number" id="mktShopeeFixa" value="3.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white"&gt; &lt;/div&gt; &lt;div&gt; &lt;label class="block text-[10px] font-semibold text-gray-400 uppercase"&gt;Frete/Extras (R$)</label>
-<input type="number" id="mktShopeeEnvio" value="0.00" step="0.01" class="w-full bg-gray-700 border border-gray-600 rounded px-2 py-1 text-sm text-white">
-</div>
+<span class="text-orange-500 font-bold block mb-3 border-b border-gray-600 pb-1">Shopee</span>
+<div class="space-y-2">
+<input type="number" id="mktShopeeTaxa" value="20.0" placeholder="Comissão %" class="w-full bg-gray-700 border border-gray-600 rounded p-1.5 text-xs text-white">
+<input type="number" id="mktShopeeFixa" value="3.00" placeholder="Taxa Fixa R$" class="w-full bg-gray-700 border border-gray-600 rounded p-1.5 text-xs text-white"&gt; &lt;input type="number" id="mktShopeeEnvio" value="0.00" placeholder="Frete R$" class="w-full bg-gray-700 border border-gray-600 rounded p-1.5 text-xs text-white">
 </div>
 </div>
 </div>
@@ -160,82 +137,38 @@ Importação Simplificada (Courier)
 </div>
 
 <div class="space-y-6">
-
-<div class="bg-gradient-to-br from-blue-900 to-indigo-950 p-6 rounded-xl border border-blue-800 shadow-xl">
+<div
+[14/07/2026 17:59] Luiz Lopes: class="bg-gradient-to-br from-blue-900 to-indigo-950 p-6 rounded-xl border border-blue-800 shadow-xl">
 <h2 class="text-lg font-bold text-white mb-4 flex items-center">
-<i class="fa-solid fa-coins mr-2 text-yellow-400"></i> Alvo de Venda
+<i class="fa-solid fa-coins mr-2 text-yellow-400"></i> Precificação
 </h2>
-<div class="space-y-4">
 <div>
-<label class="block text-xs font-semibold text-blue-200 uppercase mb-2">Preço de Venda Desejado (R$)</label>
-<input type="number" id="alvoPreco" value="299.90" step="0.10" class="w-full bg-blue-950 border border-blue-700 rounded-lg px-4 py-3 text-2xl font-bold text-white text-center focus:outline-none focus:border-yellow-400">
-</div>
+<label class="block text-xs font-semibold text-blue-200 uppercase mb-2">Preço de Venda Praticado (R$)</label>
+<input type="number" id="alvoPreco" value="149.90" step="0.10" class="w-full bg-blue-950 border border-blue-700 rounded-lg px-4 py-3 text-2xl font-bold text-white text-center focus:outline-none focus:border-yellow-400">
 </div>
 
 <div class="mt-4 pt-4 border-t border-blue-800 text-xs text-blue-200 space-y-2">
 <div class="flex justify-between">
-<span>Custo Aduaneiro Total (BRL):</span>
+<span>Custo Aduaneiro DHL (BRL):</span>
 <span id="resCustoAduaneiro" class="font-semibold text-white">R 0,00</span>
 </div>
-<div class="flex justify-between pt-2 border-t border-blue-800 text-sm font-bold text-white">
-<span>CUSTO POSTO EM ESTOQUE:</span>
-<span id="resCustoEstoque" class="text-yellow-400">R$ 0,00</span>
-</div>
-</div>
 </div>
 
-<div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-6">
-<h2 class="text-lg font-semibold text-white flex items-center border-b border-gray-700 pb-3">
-<i class="fa-solid fa-chart-line mr-2 text-green-400"></i> Desempenho por Canal
+<button onclick="salvarProduto()" class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 rounded-lg text-sm flex items-center justify-center transition">
+<i class="fa-solid fa-circle-plus mr-2"></i> Salvar / Atualizar na Lista
+</button>
+</div>
+
+<div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl space-y-4">
+<h2 class="text-md font-semibold text-white flex items-center border-b border-gray-700 pb-2">
+<i class="fa-solid fa-chart-line mr-2 text-green-400"></i> Lucro Estimado por Canal
 </h2>
-
-<div class="space-y-2">
-<div class="flex justify-between items-center">
-<span class="font-semibold text-yellow-400 text-sm"><i class="fa-solid fa-handshake"></i> Mercado Livre</span>
-<span id="badgeMeli" class="text-xs px-2 py-0.5 rounded font-bold">Excelente</span>
+<div class="space-y-2 text-xs">
+<div class="flex justify-between bg-gray-900 p-2 rounded">
+<span>Mercado Livre:</span> <strong id="resMeli" class="text-green-400">R 0,00</strong>
 </div>
-<div class="bg-gray-900 p-3 rounded-lg border border-gray-700">
-<div class="grid grid-cols-2 gap-2 text-xs">
-<div>Markup: <b id="meliMarkup" class="text-white">0.00</b></div>
-<div>Margem: <b id="meliMargem" class="text-white">0.00%</b></div>
-<div class="col-span-2 pt-1 border-t border-gray-800 flex justify-between">
-<span>Lucro Real:</span>
-<span id="meliLucro" class="font-bold text-sm text-white">R$ 0,00</span>
-</div>
-</div>
-</div>
-</div>
-
-<div class="space-y-2">
-<div class="flex justify-between items-center">
-<span class="font-semibold text-orange-400 text-sm"><i class="fa-brands fa-amazon"></i> Amazon</span>
-<span id="badgeAmazon" class="text-xs px-2 py-0.5 rounded font-bold">Normal</span>
-</div>
-<div class="bg-gray-900 p-3 rounded-lg border border-gray-700">
-<div class="grid grid-cols-2 gap-2 text-xs">
-<div>Markup: <b id="amazonMarkup" class="text-white">0.00</b></div>
-<div>Margem: <b id="amazonMargem" class="text-white">0.00%</b></div>
-<div class="col-span-2 pt-1 border-t border-gray-800 flex justify-between">
-<span>Lucro Real:</span>
-<span id="amazonLucro" class="font-bold text-sm text-white">R$ 0,00</span>
-</div>
-</div>
-</div>
-</div>
-
-<div class="space-y-2">
-<div class="flex justify-between items-center">
-<span class="font-semibold text-orange-500 text-sm"><i class="fa-solid fa-bag-shopping"></i> Shopee</span>
-<span id="badgeShopee" class="text-xs px-2 py-0.5 rounded font-bold">Perigo</span>
-</div>
-<div class="bg-gray-900 p-3 rounded-lg border border-gray-700">
-<div class="grid grid-cols-2 gap-2 text-xs">
-<div>Markup: <b id="shopeeMarkup" class="text-white">0.00</b></div>
-<div>Margem: <b id="shopeeMargem" class="text-white">0.00%</b></div>
-<div class="col-span-2 pt-1 border-t border-gray-800 flex justify-between">
-<span>Lucro Real:</span>
-<span id="shopee
-[14/07/2026 17:09] IA: Lucro" class="font-bold text-sm text-white">R$ 0,00</span>
+<div class="flex justify-between bg-gray-900 p-2 rounded">
+<span>Shopee:</span> <strong id="resShopee" class="text-green-400">R$ 0,00</strong>
 </div>
 </div>
 </div>
@@ -243,13 +176,39 @@ Importação Simplificada (Courier)
 
 </div>
 
+<div class="mt-8 bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl">
+<div class="flex flex-col md:flex-row justify-between items-center mb-6">
+<h2 class="text-lg font-semibold text-blue-400 flex items-center mb-2 md:mb-0">
+<i class="fa-solid fa-list-check mr-2"></i> Cadastro Geral de Produtos
+</h2>
+<input type="text" id="buscaInput" oninput="filtrarProdutos()" placeholder="Pesquisar por nome ou SKU..." class="bg-gray-700 border border-gray-600 rounded px-4 py-1.5 text-sm text-white focus:outline-none">
 </div>
 
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs border-collapse">
+<thead>
+<tr class="bg-gray-700 text-gray-300 uppercase tracking-wider border-b border-gray-600">
+<th class="p-3">Foto</th>
+<th class="p-3">Produto / Tipo</th>
+<th class="p-3">Custo Un.</th>
+<th class="p-3">Preço Venda</th>
+<th class="p-3">Lucro ML</th>
+<th class="p-3">Lucro AMZ</th>
+<th class="p-3">Lucro SHP</th>
+<th class="p-3 text-center">Ações</th>
+</tr>
+</thead>
+<tbody id="tabelaCorpo" class="divide-y divide-gray-700">
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
 <script>
-// Elementos de entrada
+let produtos = JSON.parse(localStorage.getItem('smartmarkup_produtos')) || [];
+let imagemBase64 = "";
+
 const inputs = [
 'prodTipo', 'impFob', 'impDolar', 'impFreteDhl', 'impSeguro',
 'impAliquotaII', 'impIcms', 'impTaxaDhlBrl', 'opEmbalagem',
@@ -259,132 +218,192 @@ const inputs = [
 'mktShopeeTaxa', 'mktShopeeFixa', 'mktShopeeEnvio'
  ];
 
-// Adiciona ouvinte de evento em todos os inputs para atualizar em tempo real
 inputs.forEach(id => {
-document.getElementById(id).addEventListener('input', calcularTudo);
-document.getElementById(id).addEventListener('change', calcularTudo);
+document.getElementById(id).addEventListener('input', calcular);
 });
 
-// Lógica de Preview de Imagem
+// Conversor de Imagem para salvar localmente
 document.getElementById('prodImagem').addEventListener('change', function(e) {
+const file = e.target.files[0];
+if (file) {
 const reader = new FileReader();
-reader.onload = function(){
-const preview = document.getElementById('previewImg');
-const placeholder = document.getElementById('previewPlaceholder');
-preview.src = reader.result;
-preview.classList.remove('hidden');
-placeholder.classList.add('hidden');
-}
-if(e.target.files[0]) {
-reader.readAsDataURL(e.target.files[0]);
+reader.onload = function(event) {
+imagemBase64 = event.target.result;
+document.getElementById('previewImg').src = imagemBase64;
+document.getElementById('previewImg').classList.remove('hidden');
+document.getElementById('previewPlaceholder').classList.add('hidden');
+};
+reader.readAsDataURL(file);
 }
 });
 
-function calcularTudo() {
-// Obter Valores de Entrada
+function calcular() {
 const fob = parseFloat(document.getElementById('impFob').value) || 0;
 const dolar = parseFloat(document.getElementById('impDolar').value) || 0;
-const freteDhl = parseFloat(document.getElementById('impFreteDhl').value) || 0;
+const frete = parseFloat(document.getElementById('
+[14/07/2026 17:59] Luiz Lopes: impFreteDhl').value) || 0;
 const seguro = parseFloat(document.getElementById('impSeguro').value) || 0;
-const aliquotaII = (parseFloat(document.getElementById('impAliquotaII').value) || 0) / 100;
-const icmsAliquota = (parseFloat(document.getElementById('impIcms').value) || 0) / 100;
-const taxasDhlBrl = parseFloat(document.getElementById('impTaxaDhlBrl').value) || 0;
+const aliqII = (parseFloat(document.getElementById('impAliquotaII').value) || 0) / 100;
+const aliqIcms = (parseFloat(document.getElementById('impIcms').value) || 0) / 100;
+const taxaDhl = parseFloat(document.getElementById('impTaxaDhlBrl').value) || 0;
 
 const embalagem = parseFloat(document.getElementById('opEmbalagem').value) || 0;
 const mkt = parseFloat(document.getElementById('opMkt').value) || 0;
 const custoFixo = parseFloat(document.getElementById('opCustoFixo').value) || 0;
 const impSimples = (parseFloat(document.getElementById('opSimplesNacional').value) || 0) / 100;
-
 const precoVenda = parseFloat(document.getElementById('alvoPreco').value) || 0;
 
-// --- 1. CÁLCULO DE IMPORTAÇÃO (COURIER) ---
-// Valor CIF Aduaneiro em Reais
-const cifUsd = fob + freteDhl + seguro;
-const cifBrl = cifUsd * dolar;
+// Importação
+const cifBrl = (fob + frete + seguro) * dolar;
+const iiVal = cifBrl * aliqII;
+const icmsVal = aliqIcms > 0 ? ((cifBrl + iiVal) / (1 - aliqIcms)) * aliqIcms : 0;
+const custoImportacao = cifBrl + iiVal + icmsVal + taxaDhl;
 
-// Imposto de Importação (Federal)
-const impostoImportacao = cifBrl * aliquotaII;
+// Custo total de estoque
+const custoEstoque = custoImportacao + embalagem + custoFixo;
 
-// Cálculo do ICMS por dentro (Regra padrão brasileira)
-// Fórmula da Base do ICMS: (CIF + II) / (1 - Alíquota ICMS)
-let icmsBrl = 0;
-if (icmsAliquota < 1) {
-const baseIcms = (cifBrl + impostoImportacao) / (1 - icmsAliquota);
-icmsBrl = baseIcms * icmsAliquota;
+document.getElementById('resCustoAduaneiro').innerText = formatarBRL(custoImportacao);
+document.getElementById('resCustoEstoque').innerText = formatarBRL(custoEstoque);
+
+// Marketplaces
+const meli = calcularMkt('Meli', custoEstoque, precoVenda, mkt, impSimples);
+const amz = calcularMkt('Amazon', custoEstoque, precoVenda, mkt, impSimples);
+const shp = calcularMkt('Shopee', custoEstoque, precoVenda, mkt, impSimples);
+
+document.getElementById('resMeli').innerText = formatarBRL(meli.lucro);
+document.getElementById('resAmazon').innerText = formatarBRL(amz.lucro);
+document.getElementById('resShopee').innerText = formatarBRL(shp.lucro);
+
+return { custoEstoque, precoVenda, meli, amz, shp };
 }
 
-// Total do desembaraço da carga em BRL (Custos da Receita + DHL)
-const totalCustoImportacao = cifBrl + impostoImportacao + icmsBrl + taxasDhlBrl;
+function calcularMkt(id, custo, venda, mkt, simples) {
+const taxa = (parseFloat(document.getElementById(mkt${id}Taxa).value)  0) / 100; const fixa = parseFloat(document.getElementById(mkt{id}Envio`).value)  0;
 
-// --- 2. CUSTO POSTO EM ESTOQUE ---
-const custosNacionaisFixo = embalagem + custoFixo;
-const custoEstoqueTotal = totalCustoImportacao + custosNacionaisFixo;
-
-// Atualiza Dashboard Central (Parte Superior Direita)
-document.getElementById('resCustoAduaneiro').innerText = formatarBRL(totalCustoImportacao);
-document.getElementById('resCustosOps').innerText = formatarBRL(custosNacionaisFixo);
-document.getElementById('resCustoEstoque').innerText = formatarBRL(custoEstoqueTotal);
-
-// --- 3. CÁLCULO DE CANAIS DE MARKETPLACES ---
-calcularCanal('Meli', custoEstoqueTotal, precoVenda, mkt, impSimples);
-calcularCanal('Amazon', custoEstoqueTotal, precoVenda, mkt, impSimples);
-calcularCanal('Shopee', custoEstoqueTotal, precoVenda, mkt, impSimples);
+const comissao = venda * taxa;
+const simplesNac = venda * simples;
+const lucro = venda - (custo + comissao + fixa + envio + simplesNac + mkt);
+return { lucro };
 }
 
-function calcularCanal(canalId, custoEstoque, precoVenda, marketing, impSimplesAliq) {
-// Pegar os parâmetros específicos do Marketplace selecionado
-const comissaoPercentual = (parseFloat(document.getElementById(mkt${canalId}Taxa).value) || 0) / 100; const taxaFixa = parseFloat(document.getElementById(mkt${canalId}Fixa).value) || 0;
-const custoEnvio = parseFloat(document.getElementById(mkt${canalId}Envio).value) || 0;
+function salvarProduto() {
+const nome = document.getElementById('prodNome').value.trim();
+if(!nome) return alert("Insira o nome do produto.");
 
-// Taxa comissão sobre a venda
-c
-[14/07/2026 17:09] IA: onst taxaComissaoVenda = precoVenda * comissaoPercentual;
-// Imposto de faturamento nacional (Simples Nacional)
-const impostoNacional = precoVenda * impSimplesAliq;
+const tipo = document.getElementById('prodTipo').value;
+const calculos = calcular();
 
-// Despesa total de venda
-const totalDespesaVenda = taxaComissaoVenda + taxaFixa + custoEnvio + impostoNacional + marketing;
+const produto = {
+id: Date.now(),
+nome,
+tipo,
+imagem: imagemBase64 || "https://placehold.co/60x60/374151/white?text=Sem+Foto",
+custoEstoque: calculos.custoEstoque,
+precoVenda: calculos.precoVenda,
+lucroMeli: calculos.meli.lucro,
+lucroAmz: calculos.amz.lucro,
+lucroShp: calculos.shp.lucro
+};
 
-// Lucro Real
-const lucroReal = precoVenda - (custoEstoque + totalDespesaVenda);
-
-// Margem Real (%)
-const margemReal = precoVenda > 0 ? (lucroReal / precoVenda) * 100 : 0;
-
-// Markup Praticado (Preço de Venda / Custo de Aquisição)
-const markup = custoEstoque > 0 ? (precoVenda / custoEstoque) : 0;
-
-// Interface e Badges de Alerta de Margem
-const badge = document.getElementById(badge${canalId});
-if (margemReal <= 0) {
-badge.innerText = "Prejuízo";
-badge.className = "text-xs px-2 py-0.5 rounded font-bold bg-red-900/80 text-red-300 border border-red-700";
-} else if (margemReal < 10) {
-badge.innerText = "Apertada";
-badge.className = "text-xs px-2 py-0.5 rounded font-bold bg-yellow-900/80 text-yellow-300 border border-yellow-700";
-} else {
-badge.innerText = "Saudável";
-badge.className = "text-xs px-2 py-0.5 rounded font-bold bg-green-900/80 text-green-300 border border-green-700";
+produtos.push(produto);
+localStorage.setItem('smartmarkup_produtos', JSON.stringify(produtos));
+listarProdutos();
+limparFormulario();
 }
 
-// Exibir Dados Formatados
-document.getElementById(${canalId.toLowerCase()}Markup).innerText = markup.toFixed(2); document.getElementById(`${canalId.toLowerCase()}Margem).innerText = margemReal.toFixed(2) + '%';
+function listarProdutos() {
+const tabela = document.getElementById('tabelaCorpo');
+tabela.innerHTML = "";
 
-const txtLucro = document.getElementById(${canalId.toLowerCase()}Lucro);
-txtLucro.innerText = formatarBRL(lucroReal);
-if(lucroReal < 0) {
-txtLucro.className = "font-bold text-sm text-red-400";
-} else {
-txtLucro.className = "font-bold text-sm text-green-400";
-}
+produtos.forEach(p => {
+tabela.innerHTML += &lt;tr class="hover:bg-gray-700/50 transition"&gt; &lt;td class="p-3"&gt;&lt;img src="${p.imagem}" class="w-10 h-10 object-cover rounded border border-gray-600"></td>
+<td class="p-3"><strong>${p.nome}&lt;/strong&gt;&lt;br&gt;&lt;span class="text-gray-400 text-[10px]"&gt;${p.tipo}</span></td>
+<td class="p-3">${formatarBRL(p.custoEstoque)}&lt;/td&gt; &lt;td class="p-3 text-blue-300 font-semibold"&gt;${formatarBRL(p.precoVenda)}</td>
+<td class="p-3 ${p.lucroMeli &gt; 0 ? 'text-green-400' : 'text-red-400'}"&gt;${formatarBRL(p.lucroMeli)}</td>
+<td class="p-3 ${p.lucroAmz &gt; 0 ? 'text-green-400' : 'text-red-400'}"&gt;${formatarBRL(p.lucroAmz)}</td>
+<td class="p-3 ${p.lucroShp &gt; 0 ? 'text-green-400' : 'text-red-400'}"&gt;${formatarBRL(p.lucroShp)}</td>
+<td class="p-3 text-center">
+<button onclick="deletarProduto(${p.id})" class="text-red-500 hover:text-red-400 p-1"&gt;&lt;i class="fa-solid fa-trash"&gt;&lt;/i&gt;&lt;/button&gt; &lt;/td&gt; &lt;/tr&gt;;
+});
 }
 
-function formatarBRL(valor) {
-return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+function deletarProduto(id) {
+produtos = produtos.filter(p => p.id !== id);
+localStorage.setItem('smartmarkup_produtos', JSON.stringify(produtos));
+li
+[14/07/2026 17:59] Luiz Lopes: starProdutos();
 }
 
-// Iniciar cálculo inicial
-calcularTudo();
+function filtrarProdutos() {
+const busca = document.getElementById('buscaInput').value.toLowerCase();
+const linhas = document.querySelectorAll('#tabelaCorpo tr');
+linhas.forEach(linha => {
+const nome = linha.querySelector('td:nth-child(2)').innerText.toLowerCase();
+linha.style.display = nome.includes(busca) ? "" : "none";
+});
+}
+
+function limparFormulario() {
+document.getElementById('prodNome').value = "";
+imagemBase64 = "";
+document.getElementById('previewImg').classList.add('hidden');
+document.getElementById('previewPlaceholder').classList.remove('hidden');
+}
+
+// Exportação de Dados para CSV (Compatível com Excel)
+function exportarCSV() {
+let csv = "ID;Nome;Tipo;CustoEstoque;PrecoVenda;LucroMeli;LucroAmazon;LucroShopee\n";
+produtos.forEach(p => {
+csv += ${p.id};${p.nome};${p.tipo};${p.custoEstoque.toFixed(2)};${p.precoVenda.toFixed(2)};${p.lucroMeli.toFixed(2)};${p.lucroAmz.toFixed(2)};${p.lucroShp.toFixed(2)}\n;
+});
+const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+const link = document.createElement("a");
+link.href = URL.createObjectURL(blob);
+link.setAttribute("download", "smartmarkup_produtos.csv");
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
+}
+
+// Importação de Dados do CSV para o App
+function importarCSV(event) {
+const file = event.target.files[0];
+if (!file) return;
+
+const reader = new FileReader();
+reader.onload = function(e) {
+const linhas = e.target.result.split('\n');
+// Pular o cabeçalho
+for(let i = 1; i < linhas.length; i++) {
+const dados = linhas[i].split(';');
+if(dados.length < 8) continue;
+
+produtos.push({
+id: Date.now() + i,
+nome: dados[1],
+tipo: dados[2],
+imagem: "https://placehold.co/60x60/374151/white?text=Importado",
+custoEstoque: parseFloat(dados[3]) || 0,
+precoVenda: parseFloat(dados[4]) || 0,
+lucroMeli: parseFloat(dados[5]) || 0,
+lucroAmz: parseFloat(dados[6]) || 0,
+lucroShp: parseFloat(dados[7]) || 0
+});
+}
+localStorage.setItem('smartmarkup_produtos', JSON.stringify(produtos));
+listarProdutos();
+alert("Produtos importados com sucesso!");
+};
+reader.readAsText(file);
+}
+
+function formatarBRL(val) {
+return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+// Iniciar App
+calcular();
+listarProdutos();
 </script>
 </body>
 </html>
